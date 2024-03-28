@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:unfold_news/presentation/home/widgets/news_tile_widget.dart';
 
+import '../../../components/nav_bar.dart';
 import '../widgets/trending_card_widget.dart';
 
 class HomePage extends StatelessWidget {
@@ -9,6 +10,7 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      floatingActionButton: const BottomNavBar(),
       body: Padding(
         padding: const EdgeInsets.all(10),
         child: SingleChildScrollView(
@@ -121,14 +123,16 @@ class HomePage extends StatelessWidget {
                     title:
                         "ദൈവത്തിന്റെ പോരാളികള്‍.. അല്ലെങ്കില്‍ വേണ്ട, മുംബൈ ഇന്ത്യന്‍സ് പൊട്ടി! ഹൈദരാബാദിനെതിരെ പരാജയം 31 റണ്‍സിന്",
                     author: "Sai Manoj",
-                    imageUrl: "https://static-ai.asianetnews.com/images/01ht0b6ea9bjhazqgtg1zt5pmq/heinrich-klaasen--1-_700x350xt.jpg",
+                    imageUrl:
+                        "https://static-ai.asianetnews.com/images/01ht0b6ea9bjhazqgtg1zt5pmq/heinrich-klaasen--1-_700x350xt.jpg",
                     time: "5 hours ago",
                   ),
                   NewsTile(
                     title:
                         "ദൈവത്തിന്റെ പോരാളികള്‍.. അല്ലെങ്കില്‍ വേണ്ട, മുംബൈ ഇന്ത്യന്‍സ് പൊട്ടി! ഹൈദരാബാദിനെതിരെ പരാജയം 31 റണ്‍സിന്",
                     author: "Sai Manoj",
-                    imageUrl: "https://static-ai.asianetnews.com/images/01ht0b6ea9bjhazqgtg1zt5pmq/heinrich-klaasen--1-_700x350xt.jpg",
+                    imageUrl:
+                        "https://static-ai.asianetnews.com/images/01ht0b6ea9bjhazqgtg1zt5pmq/heinrich-klaasen--1-_700x350xt.jpg",
                     time: "5 hours ago",
                   ),
                 ],
