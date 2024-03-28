@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:unfold_news/core/theme.dart';
 
-import 'presentation/pages/home_page.dart';
+import 'presentation/home/pages/home_page.dart';
 
 void main() {
   runApp(const MyApp());
@@ -13,7 +13,8 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      debugShowCheckedModeBanner: false,
+      title: 'Unfold News',
       theme: lightTheme,
       themeMode: ThemeMode.system,
       darkTheme: darkTheme,
