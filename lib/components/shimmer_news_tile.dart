@@ -30,7 +30,7 @@ class ShimmerNewsTile extends StatelessWidget {
                     ),
                     const SizedBox(width: 10),
                     ShimmerContainer(
-                      width: MediaQuery.of(context).size.width / 2.3,
+                      width: MediaQuery.of(context).size.width / 2.6,
                       hight: 20,
                     ),
                   ],

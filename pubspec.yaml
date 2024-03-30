@@ -38,6 +38,8 @@ dependencies:
   get: ^4.6.6
   http: ^1.2.1
   shimmer: ^3.0.0
+  flutter_tts: ^4.0.2
+  fl_chart: ^0.35.0
 
 dev_dependencies:
   flutter_test:

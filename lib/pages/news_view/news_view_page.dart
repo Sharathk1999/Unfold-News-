@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:unfold_news/controller/news_controller.dart';
 import 'package:unfold_news/models/news_model.dart';
 
 import '../../core/time_ago.dart';
@@ -14,6 +15,7 @@ class NewsViewPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    NewsController controller = Get.put(NewsController());
     return Scaffold(
       body: SafeArea(
         child: Padding(
@@ -95,6 +97,16 @@ class NewsViewPage extends StatelessWidget {
                           fontSize: 18,
                           color:
                               Theme.of(context).colorScheme.secondaryContainer),
+                    ),
+                    const Spacer(),
+                    IconButton(
+                      onPressed: () {
+                        controller.textToAudio(news.description ?? news.content ?? "No description available");
+                      },
+                      icon: const Icon(
+                        CupertinoIcons.mic,
+                        color: Colors.blueGrey,
+                      ),
                     ),
                   ],
                 ),

@@ -37,7 +37,7 @@ class SearchNews extends StatelessWidget {
                     color: Theme.of(context).colorScheme.primary,
                   ),
                   child: const CircularProgressIndicator(
-                    color: Colors.blueGrey,
+                    color: Colors.white,
                   ),
                 ) :
                GestureDetector(

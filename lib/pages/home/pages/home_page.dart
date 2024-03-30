@@ -7,6 +7,7 @@ import 'package:unfold_news/controller/news_controller.dart';
 import 'package:unfold_news/core/time_ago.dart';
 import 'package:unfold_news/pages/home/widgets/news_tile_widget.dart';
 import 'package:unfold_news/pages/news_view/news_view_page.dart';
+import 'package:unfold_news/pages/price/price_page.dart';
 
 import '../widgets/trending_card_widget.dart';
 
@@ -28,14 +29,19 @@ class HomePage extends StatelessWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Container(
-                    width: 50,
-                    height: 50,
-                    decoration: BoxDecoration(
-                      color: Theme.of(context).colorScheme.primaryContainer,
-                      borderRadius: BorderRadius.circular(100),
+                  GestureDetector(
+                    onTap: () {
+                      Get.to(()=> const PricePage());
+                    },
+                    child: Container(
+                      width: 50,
+                      height: 50,
+                      decoration: BoxDecoration(
+                        color: Theme.of(context).colorScheme.primaryContainer,
+                        borderRadius: BorderRadius.circular(100),
+                      ),
+                      child: const Icon(CupertinoIcons.cube,color: Colors.blueGrey,),
                     ),
-                    child: const Icon(CupertinoIcons.cube,color: Colors.blueGrey,),
                   ),
                   const Text(
                     "Unfold News",
@@ -57,7 +63,7 @@ class HomePage extends StatelessWidget {
                         color: Theme.of(context).colorScheme.primaryContainer,
                         borderRadius: BorderRadius.circular(100),
                       ),
-                      child: const Icon(Icons.person,color: Colors.blueGrey,),
+                      child: const Icon(Icons.refresh_rounded,color: Colors.blueGrey,),
                     ),
                   )
                 ],
@@ -101,7 +107,7 @@ class HomePage extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    "News For you",
+                    "Tech News  ",
                     style: Theme.of(context).textTheme.bodyLarge,
                   ),
                   Text(
