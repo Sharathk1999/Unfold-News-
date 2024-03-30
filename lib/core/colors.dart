@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 const lightBGColor = Color(0xffFFFFFF);
 const lightFontColor = Color(0xff191B28);
 const lightContainerColor = Color(0xffF5F6FA);
-const lightPrimaryColor = Color.fromARGB(255, 68, 128, 249);
+const lightPrimaryColor = Color.fromARGB(255, 140, 163, 224);
 const lightTextColor = Color(0xff8E8E8E);
 
 //Dark Theme Color

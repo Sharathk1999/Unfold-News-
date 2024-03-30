@@ -1,6 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:unfold_news/components/shimmer_news_tile.dart';
+import 'package:unfold_news/components/shimmer_trending_card.dart';
 import 'package:unfold_news/controller/news_controller.dart';
 import 'package:unfold_news/core/time_ago.dart';
 import 'package:unfold_news/pages/home/widgets/news_tile_widget.dart';
@@ -33,7 +35,7 @@ class HomePage extends StatelessWidget {
                       color: Theme.of(context).colorScheme.primaryContainer,
                       borderRadius: BorderRadius.circular(100),
                     ),
-                    child: const Icon(CupertinoIcons.cube),
+                    child: const Icon(CupertinoIcons.cube,color: Colors.blueGrey,),
                   ),
                   const Text(
                     "Unfold News",
@@ -55,7 +57,7 @@ class HomePage extends StatelessWidget {
                         color: Theme.of(context).colorScheme.primaryContainer,
                         borderRadius: BorderRadius.circular(100),
                       ),
-                      child: const Icon(Icons.person),
+                      child: const Icon(Icons.person,color: Colors.blueGrey,),
                     ),
                   )
                 ],
@@ -77,7 +79,7 @@ class HomePage extends StatelessWidget {
               const SizedBox(height: 20),
                SingleChildScrollView(
                 scrollDirection: Axis.horizontal,
-                child: Obx(() => controller.isTrendingLoading.value ? const CircularProgressIndicator(): Row(
+                child: Obx(() => controller.isTrendingLoading.value ? const ShimmerTrendingCard(): Row(
                   children: controller.trendingNews.map((news) {
                     
                   return   TrendingCard(
@@ -109,7 +111,7 @@ class HomePage extends StatelessWidget {
                 ],
               ),
               const SizedBox(height: 20),
-               Obx(() =>controller.isNewsForYouLoading.value ? const CircularProgressIndicator(): Column(
+               Obx(() =>controller.isNewsForYouLoading.value ? const ShimmerNewsTile(): Column(
                 children: controller.newsForYou5.map((news) {
                   return  NewsTile(
                     title:
@@ -139,7 +141,7 @@ class HomePage extends StatelessWidget {
                 ],
               ),
                const SizedBox(height: 20),
-               Obx(() =>controller.isBusinessNewsLoading.value ? const CircularProgressIndicator(): Column(
+               Obx(() =>controller.isBusinessNewsLoading.value ? const ShimmerNewsTile(): Column(
                 children: controller.businessNews5.map((news) {
                   return  NewsTile(
                     title:
@@ -165,4 +167,3 @@ class HomePage extends StatelessWidget {
 }
 
 
-//14c7b4837f3645978b89d4c980b9d2e1

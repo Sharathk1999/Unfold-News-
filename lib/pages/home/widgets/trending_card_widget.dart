@@ -44,6 +44,9 @@ class TrendingCard extends StatelessWidget {
                 child: Image.network(
                   imageUrl,
                   fit: BoxFit.cover,
+                   errorBuilder: (context, error, stackTrace) {
+                    return Image.network("https://t3.ftcdn.net/jpg/05/52/37/18/360_F_552371867_LkVmqMEChRhMMHDQ2drOS8cwhAWehgVc.jpg");
+                  },
                 ),
               ),
             ),

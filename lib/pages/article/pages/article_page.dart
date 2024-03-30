@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:unfold_news/components/shimmer_news_tile.dart';
 import 'package:unfold_news/controller/news_controller.dart';
 import 'package:unfold_news/pages/article/widgets/search_news_widget.dart';
 import 'package:unfold_news/pages/news_view/news_view_page.dart';
@@ -19,31 +20,33 @@ class ArticlePageView extends StatelessWidget {
     return Scaffold(
       body: SafeArea(
         child: Padding(
-          padding: EdgeInsets.all(10),
+          padding: const EdgeInsets.all(10),
           child: ListView(
             children: [
-              SearchNews(),
+              const SearchNews(),
               const SizedBox(
                 height: 10.0,
               ),
-              Column(
-                children: controller.trendingNews.map((news) {
-                  return NewsTile(
-                    title: news.title ?? "no title for news",
-                    author: news.author ?? "author unknown",
-                    imageUrl: news.urlToImage ??
-                        "https://t3.ftcdn.net/jpg/05/52/37/18/360_F_552371867_LkVmqMEChRhMMHDQ2drOS8cwhAWehgVc.jpg",
-                    time: timeAgo(DateTime.parse(news.publishedAt!)),
-                    onTap: () {
-                      Get.to(
-                        () => NewsViewPage(
-                          news: news,
-                        ),
-                      );
-                    },
-                  );
-                }).toList(),
-              )
+              Obx(
+                () =>controller.isNewsForYouLoading.value ? const ShimmerNewsTile():Column(
+                  children: controller.newsForYou.map((news) {
+                    return NewsTile(
+                      title: news.title ?? "no title for news",
+                      author: news.author ?? "author unknown",
+                      imageUrl: news.urlToImage ??
+                          "https://t3.ftcdn.net/jpg/05/52/37/18/360_F_552371867_LkVmqMEChRhMMHDQ2drOS8cwhAWehgVc.jpg",
+                      time: timeAgo(DateTime.parse(news.publishedAt!)),
+                      onTap: () {
+                        Get.to(
+                          () => NewsViewPage(
+                            news: news, 
+                          ),
+                        );
+                      },
+                    );   
+                  }).toList(),
+                ),
+              ),
             ],
           ),
         ),

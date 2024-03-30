@@ -33,7 +33,7 @@ class BottomNavBar extends StatelessWidget {
                     CupertinoIcons.home,
                     color: controller.index.value == 0
                         ? Theme.of(context).colorScheme.primary
-                        : Theme.of(context).colorScheme.secondaryContainer,
+                        :   Colors.blueGrey[200],
                     size: 30,
                   ),
                 ),
@@ -44,10 +44,10 @@ class BottomNavBar extends StatelessWidget {
                     controller.index.value = 1;
                   },
                   child: Icon(
-                    CupertinoIcons.book_circle,
+                    CupertinoIcons.search_circle_fill,
                     color: controller.index.value == 1
                         ? Theme.of(context).colorScheme.primary
-                        : Theme.of(context).colorScheme.secondaryContainer,
+                        : Colors.blueGrey[200],
                     size: 30,
                   ),
                 ),
@@ -61,7 +61,7 @@ class BottomNavBar extends StatelessWidget {
                     CupertinoIcons.settings_solid,
                     color: controller.index.value == 2
                         ? Theme.of(context).colorScheme.primary
-                        : Theme.of(context).colorScheme.secondaryContainer,
+                        : Colors.blueGrey[200],
                     size: 30,
                   ),
                 ),

@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:developer';
 
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
@@ -32,17 +33,17 @@ class NewsController extends GetxController {
     try {
       var response = await http.get(Uri.parse(baseUrl));
       if (response.statusCode == 200) {
-        print(response.body);
+        log(response.body);
         var body = jsonDecode(response.body);
         var articles = body["articles"];
         for (var news in articles) {
           trendingNews.add(NewsModel.fromJson(news));
         }
-        newsForYou5.value = newsForYou.sublist(0, 5).obs;
+        
       }
-      print(trendingNews);
+      log("$trendingNews");
     } catch (e) {
-      print(e);
+      log("$e");
     }
      isTrendingLoading.value = false;
   }
@@ -54,27 +55,28 @@ class NewsController extends GetxController {
     try {
       var response = await http.get(Uri.parse(baseUrl));
       if (response.statusCode == 200) {
-        print(response.body);
+        log(response.body);
         var body = jsonDecode(response.body);
         var articles = body["articles"];
         for (var news in articles) {
           newsForYou.add(NewsModel.fromJson(news));
         }
+        newsForYou5.value = newsForYou.sublist(0, 5).obs;
       }
-      print(trendingNews);
+      log("$trendingNews");
     } catch (e) {
-      print(e);
+      log("$e");
     }
     isNewsForYouLoading.value =false;
   }
 
   Future<void> getBusinessNews() async {
     isBusinessNewsLoading.value = true;
-    var baseUrl = "https://newsapi.org/v2/top-headlines?country=us&category=business&apiKey=14c7b4837f3645978b89d4c980b9d2e1";
+    var baseUrl = "https://newsapi.org/v2/top-headlines?country=in&category=business&apiKey=14c7b4837f3645978b89d4c980b9d2e1";
     try {
       var response = await http.get(Uri.parse(baseUrl));
       if (response.statusCode == 200) {
-        print(response.body);
+        log(response.body);
         var body = jsonDecode(response.body);
         var articles = body["articles"];
         for (var news in articles) {
@@ -82,10 +84,42 @@ class NewsController extends GetxController {
         }
         businessNews5.value = businessNews.sublist(0, 5).obs;
       }
-      print(trendingNews);
+      log("$trendingNews");
     } catch (e) {
-      print(e);
+      log("$e");
     }
     isBusinessNewsLoading.value = false;
   }
+
+    Future<void> searchNews(String searchKey) async {
+    isNewsForYouLoading.value = true;
+    var baseUrl = "https://newsapi.org/v2/everything?q=$searchKey&sortBy=popularity&apiKey=14c7b4837f3645978b89d4c980b9d2e1";
+    try {
+      var response = await http.get(Uri.parse(baseUrl));
+      if (response.statusCode == 200) {
+        log(response.body);
+        var body = jsonDecode(response.body);
+        var articles = body["articles"];
+        newsForYou.clear();
+        int i = 0;
+        for (var news in articles) {
+          i++;
+          newsForYou.add(NewsModel.fromJson(news));
+          if (i==10) {
+            break;
+          }
+        }
+        
+      }else{
+        log("Something went wrong in search news");
+      }
+      log("$trendingNews");
+    } catch (e) {
+      log("$e");
+    }
+     isNewsForYouLoading.value = false;
+  }
 }
+
+
+//14c7b4837f3645978b89d4c980b9d2e1

@@ -29,7 +29,7 @@ class NewsViewPage extends StatelessWidget {
                       },
                       child: const Row(
                         children: [
-                          Icon(Icons.arrow_back_ios_new),
+                          Icon(CupertinoIcons.chevron_back),
                           SizedBox(
                             width: 5.0,
                           ),
@@ -55,6 +55,12 @@ class NewsViewPage extends StatelessWidget {
                             news.urlToImage ??
                                 "https://t3.ftcdn.net/jpg/05/52/37/18/360_F_552371867_LkVmqMEChRhMMHDQ2drOS8cwhAWehgVc.jpg",
                             fit: BoxFit.cover,
+                            errorBuilder: (context, error, stackTrace) {
+                              return Image.network(
+                                "https://t3.ftcdn.net/jpg/05/52/37/18/360_F_552371867_LkVmqMEChRhMMHDQ2drOS8cwhAWehgVc.jpg",
+                                fit: BoxFit.cover,
+                              );
+                            },
                           ),
                         ),
                       )
@@ -139,7 +145,9 @@ class NewsViewPage extends StatelessWidget {
                   children: [
                     Flexible(
                       child: Text(
-                        news.description ?? news.content ?? "no description for the news",
+                        news.description ??
+                            news.content ??
+                            "no description for the news",
                         style: TextStyle(
                             fontSize: 18,
                             color: Theme.of(context)
