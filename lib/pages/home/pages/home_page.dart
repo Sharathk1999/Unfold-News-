@@ -7,7 +7,7 @@ import 'package:unfold_news/controller/news_controller.dart';
 import 'package:unfold_news/core/time_ago.dart';
 import 'package:unfold_news/pages/home/widgets/news_tile_widget.dart';
 import 'package:unfold_news/pages/news_view/news_view_page.dart';
-import 'package:unfold_news/pages/price/price_page.dart';
+import 'package:unfold_news/pages/top_widgets/top_widgets.dart';
 
 import '../widgets/trending_card_widget.dart';
 
@@ -31,7 +31,7 @@ class HomePage extends StatelessWidget {
                 children: [
                   GestureDetector(
                     onTap: () {
-                      Get.to(()=> const PricePage());
+                      Get.to(()=>  TrendingWidgetsPage());
                     },
                     child: Container(
                       width: 50,

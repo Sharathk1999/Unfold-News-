@@ -44,7 +44,7 @@ class ShimmerTrendingCard extends StatelessWidget {
             ),
           ],
         ),
-        SizedBox(height: 10),
+        const SizedBox(height: 10),
         Row(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
@@ -57,7 +57,7 @@ class ShimmerTrendingCard extends StatelessWidget {
         const SizedBox(height: 10),
         Row(
           children: [
-            ShimmerContainer(
+            const ShimmerContainer(
               width: 30,
               hight: 30,
             ),

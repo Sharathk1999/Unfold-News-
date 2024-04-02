@@ -34,7 +34,6 @@ class LanguageSelectionBox extends StatelessWidget {
             onTap: () {
              controller.setLanguage("ml");
               Navigator.pop(context, 'Malayalam');
-              print(controller.selectedLanguage);
             },
           ),
           // Add more language items as needed
