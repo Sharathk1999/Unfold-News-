@@ -103,9 +103,11 @@ class NewsViewPage extends StatelessWidget {
                       onPressed: () {
                         controller.textToAudio(news.description ?? news.content ?? "No description available");
                       },
-                      icon: const Icon(
-                        CupertinoIcons.mic,
-                        color: Colors.blueGrey,
+                      icon:  Obx(
+                        ()=>Icon(
+                         controller.isReading.value ? CupertinoIcons.waveform: CupertinoIcons.mic,
+                          color: Colors.blueGrey,
+                        ),
                       ),
                     ),
                   ],

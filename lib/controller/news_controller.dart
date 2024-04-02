@@ -13,10 +13,12 @@ class NewsController extends GetxController {
   RxList<NewsModel> newsForYou5 = <NewsModel>[].obs;
   RxList<NewsModel> businessNews = <NewsModel>[].obs;
   RxList<NewsModel> businessNews5 = <NewsModel>[].obs;
+  RxString selectedLanguage = "en".obs;
 
   RxBool isTrendingLoading = false.obs;
   RxBool isNewsForYouLoading = false.obs;
   RxBool isBusinessNewsLoading = false.obs;
+  RxBool isReading = false.obs;
 
   FlutterTts flutterTts = FlutterTts();
 
@@ -26,12 +28,13 @@ class NewsController extends GetxController {
     getTrendingNews();
     getNewsForYou();
     getBusinessNews();
+    
   }
 
   Future<void> getTrendingNews() async {
     isTrendingLoading.value = true;
     var baseUrl =
-        "https://newsapi.org/v2/top-headlines?sources=techcrunch&apiKey=14c7b4837f3645978b89d4c980b9d2e1";
+        "https://newsapi.org/v2/top-headlines?sources=techcrunch&language=${selectedLanguage.value}&apiKey=14c7b4837f3645978b89d4c980b9d2e1";
     try {
       var response = await http.get(Uri.parse(baseUrl));
       if (response.statusCode == 200) {
@@ -52,7 +55,7 @@ class NewsController extends GetxController {
   Future<void> getNewsForYou() async {
     isNewsForYouLoading.value = true;
     var baseUrl =
-        "https://newsapi.org/v2/top-headlines?sources=techcrunch&apiKey=14c7b4837f3645978b89d4c980b9d2e1";
+        "https://newsapi.org/v2/top-headlines?sources=techcrunch&language=${selectedLanguage.value}&apiKey=14c7b4837f3645978b89d4c980b9d2e1";
     try {
       var response = await http.get(Uri.parse(baseUrl));
       if (response.statusCode == 200) {
@@ -73,16 +76,21 @@ class NewsController extends GetxController {
 
   Future<void> getBusinessNews() async {
     isBusinessNewsLoading.value = true;
-    var baseUrl =
-        "https://newsapi.org/v2/top-headlines?country=in&category=business&apiKey=14c7b4837f3645978b89d4c980b9d2e1";
+    var baseUrl = "https://newsapi.org/v2/everything?q=tesla&language=${selectedLanguage.value}&sortBy=publishedAt&apiKey=14c7b4837f3645978b89d4c980b9d2e1";
+        //"https://newsapi.org/v2/top-headlines?country=in&category=business&apiKey=14c7b4837f3645978b89d4c980b9d2e1";
+        log("This base url with malayalam => $baseUrl");
     try {
       var response = await http.get(Uri.parse(baseUrl));
       if (response.statusCode == 200) {
         log(response.body);
         var body = jsonDecode(response.body);
         var articles = body["articles"];
+        businessNews.clear();
         for (var news in articles) {
           businessNews.add(NewsModel.fromJson(news));
+        }
+        if (businessNews.length == 1) {
+          businessNews5.value = businessNews;
         }
         businessNews5.value = businessNews.sublist(0, 5).obs;
       }
@@ -96,7 +104,7 @@ class NewsController extends GetxController {
   Future<void> searchNews(String searchKey) async {
     isNewsForYouLoading.value = true;
     var baseUrl =
-        "https://newsapi.org/v2/everything?q=$searchKey&sortBy=popularity&apiKey=14c7b4837f3645978b89d4c980b9d2e1";
+         "https://newsapi.org/v2/everything?q=$searchKey&sortBy=popularity&language=${selectedLanguage.value}&apiKey=14c7b4837f3645978b89d4c980b9d2e1";
     try {
       var response = await http.get(Uri.parse(baseUrl));
       if (response.statusCode == 200) {
@@ -122,14 +130,25 @@ class NewsController extends GetxController {
     isNewsForYouLoading.value = false;
   }
 
+  void setLanguage(String language){
+    selectedLanguage.value=language;
+    getBusinessNews();
+  }
+
   Future<void> textToAudio(String content) async {
-    await flutterTts.setLanguage("en-IN");
+    if (!isReading.value) {
+      isReading.value=true;
+      await flutterTts.setLanguage("${selectedLanguage.value}-IN");
 
     await flutterTts.setSpeechRate(0.5);
 
     await flutterTts.setPitch(1.0);
 
     await flutterTts.speak(content);
+    }else{
+      await flutterTts.stop();
+      isReading.value=false;
+    }
   }
 }
 

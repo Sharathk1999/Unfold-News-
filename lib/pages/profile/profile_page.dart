@@ -1,15 +1,21 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:unfold_news/components/language_sheet.dart';
+
+import '../../controller/news_controller.dart';
+import 'widgets/theme_dialog.dart';
 
 class ProfilePageView extends StatelessWidget {
   const ProfilePageView({super.key});
 
   @override
   Widget build(BuildContext context) {
+    NewsController controller = Get.put(NewsController());
     return Scaffold(
       appBar: AppBar(
         title: const Text(
-          'User Profile',
+          'User Profile (updating soon)',
           style: TextStyle(
             fontSize: 24,
             fontFamily: "Raleway",
@@ -31,27 +37,28 @@ class ProfilePageView extends StatelessWidget {
                   radius: 80,
                   child: Icon(CupertinoIcons.person),
                 ),
-                const SizedBox(width: 20,),
+                const SizedBox(
+                  width: 20,
+                ),
                 ElevatedButton(
                   onPressed: () {
-                    // Implement sign out functionality
+                    //! Implement sign out functionality
                   },
                   style: ElevatedButton.styleFrom(
                     foregroundColor: Colors.white,
-                    backgroundColor: Theme.of(context).colorScheme.primary, // Text color
+                    backgroundColor: Theme.of(context).colorScheme.primary,
                     padding: const EdgeInsets.symmetric(
-                        horizontal: 20, vertical: 12), // Button padding
+                        horizontal: 20, vertical: 12),
                     shape: RoundedRectangleBorder(
-                      borderRadius:
-                          BorderRadius.circular(10), // Button border radius
+                      borderRadius: BorderRadius.circular(10),
                     ),
-                    elevation: 3, // Elevation
+                    elevation: 3,
                   ),
                   child: const Text(
                     'Sign Out',
                     style: TextStyle(
                       fontFamily: "Raleway",
-                      fontSize: 16, // Text size
+                      fontSize: 16,
                     ),
                   ),
                 )
@@ -79,18 +86,32 @@ class ProfilePageView extends StatelessWidget {
               icon: CupertinoIcons.color_filter,
               label: 'Change Theme',
               onTap: () {
-                // Implement theme change functionality
+                showDialog(
+                  context: context,
+                  builder: (BuildContext context) {
+                    return const ThemeDialog();
+                  },
+                );
               },
             ),
             const SizedBox(height: 20),
-            _buildOptionItem(
-              context,
-              icon: CupertinoIcons.globe,
-              label: 'Select Language',
-              onTap: () {
-                // Implement language selection functionality
-              },
-            ),
+            Obx(
+              () => _buildOptionItem(
+                context,
+                icon: CupertinoIcons.globe,
+                label: 'Select Language (${controller.selectedLanguage})',
+                onTap: () {
+                  showDialog(
+                    context: context,
+                    builder: (context) {
+                      return const Dialog(
+                        child: LanguageSelectionBox(),
+                      );
+                    },
+                  );
+                },
+              ),
+            )
           ],
         ),
       ),
@@ -101,7 +122,7 @@ class ProfilePageView extends StatelessWidget {
       {required IconData icon,
       required String label,
       required VoidCallback onTap}) {
-    return InkWell(
+    return GestureDetector(
       onTap: onTap,
       child: Container(
         padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),

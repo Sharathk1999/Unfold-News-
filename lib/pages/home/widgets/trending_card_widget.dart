@@ -59,10 +59,12 @@ class TrendingCard extends StatelessWidget {
                 Text(
                   tag,
                   style: Theme.of(context).textTheme.labelSmall,
+                  overflow: TextOverflow.ellipsis,
                 ),
                 Text(
                   time,
                   style: Theme.of(context).textTheme.labelSmall,
+                  overflow: TextOverflow.ellipsis,
                 ),
               ],
             ),
@@ -77,6 +79,7 @@ class TrendingCard extends StatelessWidget {
                       fontWeight: FontWeight.w500,
                     ),
                     maxLines: 2,
+                    overflow: TextOverflow.ellipsis,
                   ),
                 )
               ],

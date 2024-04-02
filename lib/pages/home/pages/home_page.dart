@@ -137,7 +137,7 @@ class HomePage extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    "Business News",
+                    "Business News (${controller.selectedLanguage})",
                     style: Theme.of(context).textTheme.bodyLarge,
                   ),
                   Text(
