@@ -66,7 +66,7 @@ class ProfilePageView extends StatelessWidget {
             ),
             const SizedBox(height: 20),
             const Text(
-              'Sharath Kumar',
+              'John Honai',
               style: TextStyle(
                 fontSize: 24,
                 fontWeight: FontWeight.bold,
@@ -74,7 +74,7 @@ class ProfilePageView extends StatelessWidget {
             ),
             const SizedBox(height: 10),
             const Text(
-              'sharath.kumar@gmail.com',
+              'john.honai@gmail.com',
               style: TextStyle(
                 fontSize: 18,
                 color: Colors.grey,
