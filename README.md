@@ -37,7 +37,7 @@ Watch On Youtube <a href="https://youtu.be/ZzDQ7nONW_4
   flutter_localization: ^0.2.0,
   url_launcher: ^6.2.5.
 
-  <a href=""> ![App Download](https://storage.needpix.com/rsynced_images/download-2062197_1280.png) </a>
+  <a href="https://github.com/Sharathk1999/Unfold-News-/releases/download/1.0.1/Unfold.News.apk"> ![App Download](https://storage.needpix.com/rsynced_images/download-2062197_1280.png) </a>
 
 
 ## Screenshots
