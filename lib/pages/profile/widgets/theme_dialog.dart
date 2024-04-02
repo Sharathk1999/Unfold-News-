@@ -56,7 +56,7 @@ class ThemeDialog extends StatelessWidget {
                 onPressed: () {
                   Navigator.of(context).pop();
                 },
-                child: const Text('OK',style: TextStyle(color: Colors.white),),
+                child:  Text('OK',style: TextStyle(fontFamily: "Raleway",color: Theme.of(context).colorScheme.onBackground),),
               ),
             ],
           ),
