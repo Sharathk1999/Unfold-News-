@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:unfold_news/controller/news_controller.dart';
 import 'package:unfold_news/models/news_model.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import '../../core/time_ago.dart';
 
@@ -101,60 +102,47 @@ class NewsViewPage extends StatelessWidget {
                     const Spacer(),
                     IconButton(
                       onPressed: () {
-                        controller.textToAudio(news.description ?? news.content ?? "No description available");
+                        controller.textToAudio(news.description ??
+                            news.content ??
+                            "No description available");
                       },
-                      icon:  Obx(
-                        ()=>Icon(
-                         controller.isReading.value ? CupertinoIcons.waveform: CupertinoIcons.mic,
+                      icon: Obx(
+                        () => Icon(
+                          controller.isReading.value
+                              ? CupertinoIcons.waveform
+                              : CupertinoIcons.mic,
                           color: Colors.blueGrey,
                         ),
                       ),
                     ),
                   ],
                 ),
-                const SizedBox(height: 20),
-                Container(
-                  decoration: BoxDecoration(
-                    color: Theme.of(context).colorScheme.primaryContainer,
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                  // height: 30,
-                  child: const Row(
-                    children: [
-                      // Obx(
-                      //   () => newsController.isSpeeking.value
-                      //       ? IconButton(
-                      //           onPressed: () {
-                      //             newsController.stop();
-                      //           },
-                      //           icon: Icon(
-                      //             Icons.stop,
-                      //             size: 50,
-                      //           ),
-                      //         )
-                      //       : IconButton(
-                      //           onPressed: () {
-                      //             newsController.speak(
-                      //                 news.description ?? "No Description");
-                      //           },
-                      //           icon: Icon(
-                      //             Icons.play_arrow_rounded,
-                      //             size: 50,
-                      //           ),
-                      //         ),
-                      // ),
-                      // Expanded(
-                      //     child: Obx(
-                      //   () => Lottie.asset(
-                      //     'Assets/Animation/wave.json',
-                      //     height: 70,
-                      //     animate: newsController.isSpeeking.value,
-                      //   ),
-                      // ))
-                    ],
-                  ),
-                ),
                 const SizedBox(height: 5),
+                Row(
+                  children: [
+                    const Icon(
+                      CupertinoIcons.link,
+                      color: Colors.blue,
+                    ),
+                    const SizedBox(
+                      width: 10,
+                    ),
+                    GestureDetector(
+                        onTap: () async {
+                          final Uri url = Uri.parse(news.url!);
+
+                          if (!await launchUrl(url)) {
+                            throw Exception('Could not launch $url');
+                          }
+                        },
+                        child: const Text(
+                          "view article",
+                          style: TextStyle(
+                              fontFamily: "Raleway", color: Colors.blue),
+                        ))
+                  ],
+                ),
+                const SizedBox(height: 15),
                 Row(
                   children: [
                     Flexible(

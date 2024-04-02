@@ -42,7 +42,7 @@ class TrendingWidgetsPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Top Trending Flutter Widgets'),
+        title: const Text('Top Trending Flutter Widgets',style: TextStyle(fontFamily: "Raleway",fontSize: 16),),
         elevation: 0,
       ),
       body: LayoutBuilder(
@@ -83,6 +83,7 @@ class TrendingWidgetsPage extends StatelessWidget {
                           widget.title,
                           style: TextStyle(
                             fontSize: constraints.maxWidth < 600 ? 16 : 18,
+                            fontFamily: "Raleway",
                             fontWeight: FontWeight.bold,
                           ),
                         ),
@@ -90,6 +91,7 @@ class TrendingWidgetsPage extends StatelessWidget {
                         Text(
                           widget.description,
                           style: TextStyle(
+                            fontFamily: "Raleway",
                             fontSize: constraints.maxWidth < 600 ? 14 : 16,
                           ),
                         ),
