@@ -29,7 +29,6 @@ class NewsController extends GetxController {
     getTrendingNews();
     getNewsForYou();
     getBusinessNews();
-    
   }
 
   Future<void> getTrendingNews() async {
@@ -39,14 +38,12 @@ class NewsController extends GetxController {
     try {
       var response = await http.get(Uri.parse(baseUrl));
       if (response.statusCode == 200) {
-        log(response.body);
         var body = jsonDecode(response.body);
         var articles = body["articles"];
         for (var news in articles) {
           trendingNews.add(NewsModel.fromJson(news));
         }
       }
-      log("$trendingNews");
     } catch (e) {
       log("$e");
     }
@@ -60,7 +57,6 @@ class NewsController extends GetxController {
     try {
       var response = await http.get(Uri.parse(baseUrl));
       if (response.statusCode == 200) {
-        log(response.body);
         var body = jsonDecode(response.body);
         var articles = body["articles"];
         for (var news in articles) {
@@ -68,7 +64,6 @@ class NewsController extends GetxController {
         }
         newsForYou5.value = newsForYou.sublist(0, 5).obs;
       }
-      log("$trendingNews");
     } catch (e) {
       log("$e");
     }
@@ -77,13 +72,13 @@ class NewsController extends GetxController {
 
   Future<void> getBusinessNews() async {
     isBusinessNewsLoading.value = true;
-    var baseUrl = "https://newsapi.org/v2/everything?q=tesla&language=${selectedLanguage.value}&sortBy=publishedAt&apiKey=${dotenv.env["NEWS_API_KEY"]}";
-        //"https://newsapi.org/v2/top-headlines?country=in&category=business&apiKey=${dotenv.env["NEWS_API_KEY"]}";
-        log("This base url with malayalam => $baseUrl");
+    var baseUrl =
+        "https://newsapi.org/v2/everything?q=tesla&language=${selectedLanguage.value}&sortBy=publishedAt&apiKey=${dotenv.env["NEWS_API_KEY"]}";
+    //"https://newsapi.org/v2/top-headlines?country=in&category=business&apiKey=${dotenv.env["NEWS_API_KEY"]}";
+
     try {
       var response = await http.get(Uri.parse(baseUrl));
       if (response.statusCode == 200) {
-        log(response.body);
         var body = jsonDecode(response.body);
         var articles = body["articles"];
         businessNews.clear();
@@ -95,7 +90,6 @@ class NewsController extends GetxController {
         }
         businessNews5.value = businessNews.sublist(0, 5).obs;
       }
-      log("$trendingNews");
     } catch (e) {
       log("$e");
     }
@@ -105,11 +99,10 @@ class NewsController extends GetxController {
   Future<void> searchNews(String searchKey) async {
     isNewsForYouLoading.value = true;
     var baseUrl =
-         "https://newsapi.org/v2/everything?q=$searchKey&sortBy=popularity&apiKey=${dotenv.env["NEWS_API_KEY"]}";
+        "https://newsapi.org/v2/everything?q=$searchKey&sortBy=popularity&apiKey=${dotenv.env["NEWS_API_KEY"]}";
     try {
       var response = await http.get(Uri.parse(baseUrl));
       if (response.statusCode == 200) {
-        log(response.body);
         var body = jsonDecode(response.body);
         var articles = body["articles"];
         newsForYou.clear();
@@ -124,34 +117,30 @@ class NewsController extends GetxController {
       } else {
         log("Something went wrong in search news");
       }
-      log("$trendingNews");
     } catch (e) {
       log("$e");
     }
     isNewsForYouLoading.value = false;
   }
 
-  void setLanguage(String language){
-    selectedLanguage.value=language;
+  void setLanguage(String language) {
+    selectedLanguage.value = language;
     getBusinessNews();
   }
 
   Future<void> textToAudio(String content) async {
     if (!isReading.value) {
-      isReading.value=true;
+      isReading.value = true;
       await flutterTts.setLanguage("${selectedLanguage.value}-IN");
 
-    await flutterTts.setSpeechRate(0.5);
+      await flutterTts.setSpeechRate(0.5);
 
-    await flutterTts.setPitch(1.0);
+      await flutterTts.setPitch(1.0);
 
-    await flutterTts.speak(content);
-    }else{
+      await flutterTts.speak(content);
+    } else {
       await flutterTts.stop();
-      isReading.value=false;
+      isReading.value = false;
     }
   }
 }
-
-
-
