@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:developer';
 
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_tts/flutter_tts.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
@@ -34,7 +35,7 @@ class NewsController extends GetxController {
   Future<void> getTrendingNews() async {
     isTrendingLoading.value = true;
     var baseUrl =
-        "https://newsapi.org/v2/top-headlines?sources=techcrunch&language=${selectedLanguage.value}&apiKey=14c7b4837f3645978b89d4c980b9d2e1";
+        "https://newsapi.org/v2/top-headlines?sources=techcrunch&language=${selectedLanguage.value}&apiKey=${dotenv.env["NEWS_API_KEY"]}";
     try {
       var response = await http.get(Uri.parse(baseUrl));
       if (response.statusCode == 200) {
@@ -55,7 +56,7 @@ class NewsController extends GetxController {
   Future<void> getNewsForYou() async {
     isNewsForYouLoading.value = true;
     var baseUrl =
-        "https://newsapi.org/v2/top-headlines?sources=techcrunch&language=${selectedLanguage.value}&apiKey=14c7b4837f3645978b89d4c980b9d2e1";
+        "https://newsapi.org/v2/top-headlines?sources=techcrunch&language=${selectedLanguage.value}&apiKey=${dotenv.env["NEWS_API_KEY"]}";
     try {
       var response = await http.get(Uri.parse(baseUrl));
       if (response.statusCode == 200) {
@@ -76,8 +77,8 @@ class NewsController extends GetxController {
 
   Future<void> getBusinessNews() async {
     isBusinessNewsLoading.value = true;
-    var baseUrl = "https://newsapi.org/v2/everything?q=tesla&language=${selectedLanguage.value}&sortBy=publishedAt&apiKey=14c7b4837f3645978b89d4c980b9d2e1";
-        //"https://newsapi.org/v2/top-headlines?country=in&category=business&apiKey=14c7b4837f3645978b89d4c980b9d2e1";
+    var baseUrl = "https://newsapi.org/v2/everything?q=tesla&language=${selectedLanguage.value}&sortBy=publishedAt&apiKey=${dotenv.env["NEWS_API_KEY"]}";
+        //"https://newsapi.org/v2/top-headlines?country=in&category=business&apiKey=${dotenv.env["NEWS_API_KEY"]}";
         log("This base url with malayalam => $baseUrl");
     try {
       var response = await http.get(Uri.parse(baseUrl));
@@ -104,7 +105,7 @@ class NewsController extends GetxController {
   Future<void> searchNews(String searchKey) async {
     isNewsForYouLoading.value = true;
     var baseUrl =
-         "https://newsapi.org/v2/everything?q=$searchKey&sortBy=popularity&language=${selectedLanguage.value}&apiKey=14c7b4837f3645978b89d4c980b9d2e1";
+         "https://newsapi.org/v2/everything?q=$searchKey&sortBy=popularity&apiKey=${dotenv.env["NEWS_API_KEY"]}";
     try {
       var response = await http.get(Uri.parse(baseUrl));
       if (response.statusCode == 200) {
@@ -153,4 +154,4 @@ class NewsController extends GetxController {
 }
 
 
-//14c7b4837f3645978b89d4c980b9d2e1
+
