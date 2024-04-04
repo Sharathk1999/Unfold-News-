@@ -14,7 +14,8 @@ class TrendingCard extends StatelessWidget {
     required this.author,
     required this.imageUrl,
     required this.tag,
-    required this.time, required this.onTap,
+    required this.time,
+    required this.onTap,
   });
 
   @override
@@ -44,8 +45,9 @@ class TrendingCard extends StatelessWidget {
                 child: Image.network(
                   imageUrl,
                   fit: BoxFit.cover,
-                   errorBuilder: (context, error, stackTrace) {
-                    return Image.network("https://t3.ftcdn.net/jpg/05/52/37/18/360_F_552371867_LkVmqMEChRhMMHDQ2drOS8cwhAWehgVc.jpg");
+                  errorBuilder: (context, error, stackTrace) {
+                    return Image.network(
+                        "https://t3.ftcdn.net/jpg/05/52/37/18/360_F_552371867_LkVmqMEChRhMMHDQ2drOS8cwhAWehgVc.jpg");
                   },
                 ),
               ),
@@ -68,12 +70,12 @@ class TrendingCard extends StatelessWidget {
                 ),
               ],
             ),
-             Row(
+            Row(
               children: [
                 Flexible(
                   child: Text(
                     title,
-                    style:const TextStyle(
+                    style: const TextStyle(
                       fontFamily: "Raleway",
                       fontSize: 16,
                       fontWeight: FontWeight.w500,
@@ -91,7 +93,8 @@ class TrendingCard extends StatelessWidget {
               children: [
                 CircleAvatar(
                   radius: 20,
-                  backgroundColor: Theme.of(context).colorScheme.primaryContainer,
+                  backgroundColor:
+                      Theme.of(context).colorScheme.primaryContainer,
                   child: const Center(
                     child: Icon(CupertinoIcons.pen),
                   ),
@@ -99,13 +102,17 @@ class TrendingCard extends StatelessWidget {
                 // const SizedBox(
                 //   width: 2.0,
                 // ),
-                 Text(author,style:const TextStyle(
+                Flexible(
+                  child: Text(
+                    author,
+                    style: const TextStyle(
                       fontFamily: "Raleway",
                       fontSize: 12,
                       fontWeight: FontWeight.w500,
                     ),
                     overflow: TextOverflow.ellipsis,
-                   )
+                  ),
+                )
               ],
             )
           ],
