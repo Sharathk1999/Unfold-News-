@@ -33,6 +33,14 @@ class TrendingWidgetsPage extends StatelessWidget {
           'https://user-images.githubusercontent.com/43790152/169776704-cc6ac8d8-ebd7-4cf1-8239-5d4678b65bc4.png',
       packageLink: 'https://pub.dev/packages/awesome_snackbar_content',
     ),
+    TrendingWidget(
+      title: 'Talker 4.1.3',
+      description:
+          "Log your app actions, catch and handle exceptions and errors, show alerts and share log reports Show some ❤️ and star the repo to support the project!",
+      imageUrl:
+          'https://github.com/Frezyx/talker/blob/dev/docs/assets/v3/talker_flutter/talker.jpg?raw=true',
+      packageLink: 'https://pub.dev/packages/talker',
+    ),
     // Add more trending widgets as needed
   ];
 
